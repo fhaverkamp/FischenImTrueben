@@ -6,3 +6,5 @@ applications:
   name: FischenImTrueben
   host: fischenimtrueben
   disk_quota: 1024M
+  services:
+  - Internet of Things Platform-09
