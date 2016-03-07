@@ -7,4 +7,4 @@ applications:
   host: fischenimtrueben
   disk_quota: 1024M
   services:
-  - Internet of Things Platform-09
+  - iot-python
