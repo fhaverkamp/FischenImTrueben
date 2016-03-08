@@ -8,3 +8,4 @@ applications:
   disk_quota: 1024M
   services:
   - iot-python
+  - Cloudant NoSQL DB-pg
