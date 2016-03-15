@@ -10,15 +10,14 @@ except ImportError:
 
 class MyHandler(Handler):
     def do_HEAD(self):
+        print("do_HEAD()");
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
 
     def do_GET(self):
         """Respond to a GET request."""
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
+        print("do_GET()");
         Handler.do_GET(self)
 
 # Read port selected by the cloud for our application
@@ -28,7 +27,7 @@ PORT = int(os.getenv('PORT', 8000))
 os.chdir('static')
 
 control = Control()
-httpd = Server(("", PORT), Handler)
+httpd = Server(("", PORT), MyHandler)
 try:
     print("Start serving at port %i" % PORT)
     httpd.serve_forever()
