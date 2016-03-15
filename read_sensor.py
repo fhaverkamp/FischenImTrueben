@@ -70,7 +70,13 @@ class Control:
         else:
             print(status.time.isoformat(),
                   status.device, status.action + " " + status.clientAddr)
-    
+
+    def getMessage(self, no):
+        return str(self.messages[no])
+
+    def getMaxMessage(self):
+        return len(self.messages)
+
     def interruptHandler(self, signal, frame):
         print("interruptHandler()")
         self.client.disconnect()
