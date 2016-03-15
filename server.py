@@ -21,7 +21,7 @@ class MyHandler(Handler):
         Handler.do_GET(self)
 
 # Read port selected by the cloud for our application
-PORT = int(os.getenv('PORT', 8000))
+PORT = int(os.getenv('VCAP_APP_PORT', 8000))
 
 # Change current directory to avoid exposure of control files
 os.chdir('static')
