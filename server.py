@@ -10,14 +10,12 @@ except ImportError:
 
 class MyHandler(Handler):
     def do_HEAD(self):
-        print("do_HEAD()");
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
 
     def do_GET(self):
         """Respond to a GET request."""
-        print("do_GET()");
         Handler.do_GET(self)
 
 # Read port selected by the cloud for our application
