@@ -23,10 +23,10 @@ class Control:
                     "auth-method": authMethod,
                     "auth-key": authKey,
                     "auth-token": authToken }
-        
+
         try:
             self.client = ibmiotf.application.Client(options)
-            self.client.connect()            
+            self.client.connect()
         except ibmiotf.ConfigurationException as e:
             print(str(e))
             sys.exit()
@@ -36,7 +36,7 @@ class Control:
         except ibmiotf.ConnectionException as e:
             print(str(e))
             sys.exit()
-      
+
         self.client.deviceEventCallback = self.myEventCallback
         self.client.deviceStatusCallback = self.myStatusCallback
         self.client.subscribeToDeviceEvents(deviceType, deviceId, event)
@@ -50,17 +50,18 @@ class Control:
             self.messages.pop()
 
         self.messages.insert(0, data)
-        print("Last 10 messages (if there are any ...)")
-        for d in (self.messages):
-            print("  " + str(d))
-        
+
+        #print("Last 10 messages (if there are any ...)")
+        #for d in (self.messages):
+        #    print("  " + str(d))
+
         #print("plain json data:")
         #print(data)
         #print("parsed data:")
         #for key in ("myName", "cputemp", "cpuload", "sine", "outsidetemp0",
         #            "outsidetemp1", "distance"):
         #    print("  " + key + " = " + str(data["d"][key]));
-        
+
 
     def myStatusCallback(self, status):
         if status.action == "Disconnect":
@@ -72,7 +73,7 @@ class Control:
                   status.device, status.action + " " + status.clientAddr)
 
     def getMessage(self, no):
-        return str(self.messages[no])
+        return self.messages[no]
 
     def getMaxMessage(self):
         return len(self.messages)
@@ -85,7 +86,7 @@ class Control:
 def signal_handler(signal, frame):
     print('You pressed Ctrl+C!')
     sys.exit(0)
-    
+
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
     control = Control()
