@@ -5,6 +5,20 @@ import time
 import sys
 import json
 
+# RaspberryPI1
+# Organisations-ID 4r4gwj
+# Gerätetyp raspberrypi
+# Geräte-ID b827ebc0f49b
+# Authentifizierungsmethode token
+# Authentifizierungstoken _PYgtFq3tnhM2hG5f?
+
+# RaspberryPI1
+# Organisations-ID 4r4gwj
+# Gerätetyp raspberrypi
+# Geräte-ID b827eb8d5add
+# Authentifizierungsmethode token
+# Authentifizierungstoken V?FC+pX@noKIReViPJ
+
 class Control:
     def __init__(self):
         organization = "4r4gwj"
