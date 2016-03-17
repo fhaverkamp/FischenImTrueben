@@ -85,20 +85,20 @@ PORT = int(os.getenv('VCAP_APP_PORT', 8000))
 os.chdir('static')
 
 # Application
-# API-Schlüssel a-4r4gwj-kdcdgxusom
+# API-Schluessel a-4r4gwj-kdcdgxusom
 # Authentifizierungstoken t6yj+C(Uop0ThD8Bag
 #
 # RaspberryPI1
 # Organisations-ID 4r4gwj
-# Gerätetyp raspberrypi
-# Geräte-ID b827ebc0f49b
+# Geraetetyp raspberrypi
+# Geraete-ID b827ebc0f49b
 # Authentifizierungsmethode token
 # Authentifizierungstoken _PYgtFq3tnhM2hG5f?
 
 # RaspberryPI1
 # Organisations-ID 4r4gwj
-# Gerätetyp raspberrypi
-# Geräte-ID b827eb8d5add
+# Geraetetyp raspberrypi
+# Geraete-ID b827eb8d5add
 # Authentifizierungsmethode token
 # Authentifizierungstoken V?FC+pX@noKIReViPJ
 

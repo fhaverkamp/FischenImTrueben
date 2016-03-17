@@ -38,9 +38,9 @@ class Control:
 
         self.messages.insert(0, data)
 
-        #print("Last 10 messages (if there are any ...)")
-        #for d in (self.messages):
-        #    print("  " + str(d))
+        print("Last 10 messages (if there are any ...)")
+        for d in (self.messages):
+            print("  " + str(d))
 
         #print("plain json data:")
         #print(data)
@@ -74,6 +74,27 @@ def signal_handler(signal, frame):
     print('You pressed Ctrl+C!')
     sys.exit(0)
 
+devices = [
+    { "deviceType": "raspberrypi",
+      "deviceId": "b827eb8d5add",
+      "options": { "org": "4r4gwj",
+                   "id": "iotf-service",
+                   "auth-method": "apikey",
+                   "auth-key": "a-4r4gwj-puvtgsvb4w",
+                   "auth-token": "D_AHixjQsbQvg4EDnb" }
+      },
+    { "deviceType": "raspberrypi",
+      "deviceId": "b827ebc0f49b",
+      "options": { "org": "4r4gwj",
+                   "id": "iotf-service",
+                   "auth-method": "apikey",
+                   "auth-key": "a-4r4gwj-puvtgsvb4w",
+                   "auth-token": "D_AHixjQsbQvg4EDnb" }
+      },
+    ]
+
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
+    device = devices[0]
+    control = Control(device["deviceType"], device["deviceId"], device["options"])
     signal.pause()
