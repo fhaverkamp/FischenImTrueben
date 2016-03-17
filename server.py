@@ -64,15 +64,16 @@ class MyHandler(Handler):
             table = table + "<td>" + key + "</td>"
         table = table + "</tr>\n"
 
-        for i in range(0, control.getMaxMessage()):
-            data = control.getMessage(i)
+        for i in range(0, control[0].getMaxMessage()):
+            data = control[0].getMessage(i)
 
             print(data)
 
             table = table + "    <tr>"
             for key in ("myName", "cputemp", "cpuload", "sine", "outsidetemp0",
                         "outsidetemp1", "distance"):
-                table = table + "<td>" + str(data['d'][key]) + "</td>"
+                if (data['d'].get(key) != None):
+                    table = table + "<td>" + str(data['d'][key]) + "</td>"
             table = table + "</tr>\n"
 
         return table
@@ -83,7 +84,50 @@ PORT = int(os.getenv('VCAP_APP_PORT', 8000))
 # Change current directory to avoid exposure of control files
 os.chdir('static')
 
-control = Control()
+# Application
+# API-Schlüssel a-4r4gwj-kdcdgxusom
+# Authentifizierungstoken t6yj+C(Uop0ThD8Bag
+#
+# RaspberryPI1
+# Organisations-ID 4r4gwj
+# Gerätetyp raspberrypi
+# Geräte-ID b827ebc0f49b
+# Authentifizierungsmethode token
+# Authentifizierungstoken _PYgtFq3tnhM2hG5f?
+
+# RaspberryPI1
+# Organisations-ID 4r4gwj
+# Gerätetyp raspberrypi
+# Geräte-ID b827eb8d5add
+# Authentifizierungsmethode token
+# Authentifizierungstoken V?FC+pX@noKIReViPJ
+
+devices = [
+    { "deviceType": "raspberrypi",
+      "deviceId": "b827eb8d5add",
+      "options": { "org": "4r4gwj",
+                   "id": "iotf-service",
+                   "auth-method": "apikey",
+                   "auth-key": "a-4r4gwj-puvtgsvb4w",
+                   "auth-token": "D_AHixjQsbQvg4EDnb" }
+      },
+#    { "deviceType": "raspberrypi",
+#      "deviceId": "b827ebc0f49b",
+#      "options": { "org": "4r4gwj",
+#                   "id": "iotf-service",
+#                   "auth-method": "apikey",
+#                   "auth-key": "a-4r4gwj-puvtgsvb4w",
+#                   "auth-token": "D_AHixjQsbQvg4EDnb" }
+#      },
+    ]
+
+control = []
+
+for device in devices:
+    print("Adding: " + str(device))
+    c = Control(device["deviceType"], device["deviceId"], device["options"])
+    control.append(c)
+
 httpd = Server(("", PORT), MyHandler)
 try:
     print("Start serving at port %i" % PORT)

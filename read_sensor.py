@@ -5,38 +5,11 @@ import time
 import sys
 import json
 
-# RaspberryPI1
-# Organisations-ID 4r4gwj
-# Gerätetyp raspberrypi
-# Geräte-ID b827ebc0f49b
-# Authentifizierungsmethode token
-# Authentifizierungstoken _PYgtFq3tnhM2hG5f?
-
-# RaspberryPI1
-# Organisations-ID 4r4gwj
-# Gerätetyp raspberrypi
-# Geräte-ID b827eb8d5add
-# Authentifizierungsmethode token
-# Authentifizierungstoken V?FC+pX@noKIReViPJ
-
 class Control:
-    def __init__(self):
-        organization = "4r4gwj"
-        appId = "iotf-service"
-        authMethod = "apikey"
-        authKey = "a-4r4gwj-puvtgsvb4w"
-        authToken = "D_AHixjQsbQvg4EDnb"
-        configFilePath = None
-        deviceType = "raspberrypi"
-        deviceId = "b827eb8d5add"
-        event = "+"
+    def __init__(self, deviceType, deviceId, options):
         self.client = None
         self.messages = []
-        options = { "org": organization,
-                    "id": appId,
-                    "auth-method": authMethod,
-                    "auth-key": authKey,
-                    "auth-token": authToken }
+        self.event = "+"
 
         try:
             self.client = ibmiotf.application.Client(options)
@@ -53,7 +26,7 @@ class Control:
 
         self.client.deviceEventCallback = self.myEventCallback
         self.client.deviceStatusCallback = self.myStatusCallback
-        self.client.subscribeToDeviceEvents(deviceType, deviceId, event)
+        self.client.subscribeToDeviceEvents(deviceType, deviceId, self.event)
         self.client.subscribeToDeviceStatus(deviceType, deviceId)
 
     def myEventCallback(self, event):
@@ -103,5 +76,4 @@ def signal_handler(signal, frame):
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
-    control = Control()
     signal.pause()
